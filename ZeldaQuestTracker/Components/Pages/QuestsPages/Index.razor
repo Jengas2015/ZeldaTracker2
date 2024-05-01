@@ -1,0 +1,31 @@
+﻿@page "/quests"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject ZeldaQuestTracker.Data.ZeldaQuestTrackerContext DB
+@using ZeldaQuestTracker.Components.Model
+
+<PageTitle>Quest List</PageTitle>
+
+<h1>Quest List</h1>
+
+<p>
+    <a href="quests/create" class="btn btn-primary">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="DB.Quests">
+    <PropertyColumn Property="quests => quests.Name" />
+
+    <TemplateColumn Context="quests">
+        <a href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Walkthrough</a>
+    </TemplateColumn>
+
+    <TemplateColumn Context="quests">
+        <a href="@(quests.Video.StartsWith("http://") || quests.Video.StartsWith("https://") ? quests.Video : "http://" + quests.Video)">@quests.Video</a>
+    </TemplateColumn>
+
+
+    <TemplateColumn Context="quests">
+        <a href="@($"quests/edit?id={quests.Id}")">Edit</a> |
+        <a href="@($"quests/details?id={quests.Id}")">Details</a> |
+        <a href="@($"quests/delete?id={quests.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
