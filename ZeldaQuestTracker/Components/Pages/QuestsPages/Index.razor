@@ -11,21 +11,27 @@
     <a href="quests/create" class="btn btn-primary">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="DB.Quests">
-    <PropertyColumn Property="quests => quests.Name" />
-
-    <TemplateColumn Context="quests">
-        <a href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Walkthrough</a>
-    </TemplateColumn>
-
-    <TemplateColumn Context="quests">
-        <a href="@(quests.Video.StartsWith("http://") || quests.Video.StartsWith("https://") ? quests.Video : "http://" + quests.Video)">@quests.Video</a>
-    </TemplateColumn>
-
-
-    <TemplateColumn Context="quests">
-        <a href="@($"quests/edit?id={quests.Id}")">Edit</a> |
-        <a href="@($"quests/details?id={quests.Id}")">Details</a> |
-        <a href="@($"quests/delete?id={quests.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<MudTable Items="DB.Quests">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Walkthrough</MudTh>
+        <MudTh>Video</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate Context="quests">
+        <MudTd>
+            <MudLink Href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Name</MudLink>
+        </MudTd>
+        <MudTd>
+            <MudLink Href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Walkthrough</MudLink>
+        </MudTd>
+        <MudTd>
+            <MudLink Href="@(quests.Video.StartsWith("http://") || quests.Video.StartsWith("https://") ? quests.Video : "http://" + quests.Video)">@quests.Video</MudLink>
+        </MudTd>
+        <MudTd>
+            <MudLink Href="@($"quests/edit?id={quests.Id}")">Edit</MudLink> |
+            <MudLink Href="@($"quests/details?id={quests.Id}")">Details</MudLink> |
+            <MudLink Href="@($"quests/delete?id={quests.Id}")">Delete</MudLink>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
