@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZeldaQuestTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0208e6205105500cb7cdd80f63a762c22952aa4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZeldaQuestTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZeldaQuestTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

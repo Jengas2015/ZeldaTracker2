@@ -12,7 +12,11 @@
 </p>
 
 <QuickGrid Class="table" Items="DB.Quests">
-    <PropertyColumn Property="quests => quests.Name" />
+
+    <TemplateColumn Context="quests">
+        <a href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Name</a>
+    </TemplateColumn>
+
 
     <TemplateColumn Context="quests">
         <a href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Walkthrough</a>

@@ -262,3 +262,4 @@ C:\Users\areja\source\repos\ZeldaQuestTracker\ZeldaQuestTracker\bin\Debug\net8.0
 C:\Users\areja\source\repos\ZeldaQuestTracker\ZeldaQuestTracker\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\Users\areja\source\repos\ZeldaQuestTracker\ZeldaQuestTracker\obj\Debug\net8.0\ZeldaQuestTracker.csproj.AssemblyReference.cache
 C:\Users\areja\source\repos\ZeldaQuestTracker\ZeldaQuestTracker\obj\Debug\net8.0\ZeldaQue.7AB99BE1.Up2Date
+C:\Users\areja\source\repos\ZeldaQuestTracker\ZeldaQuestTracker\obj\Debug\net8.0\ZeldaQuestTracker.sourcelink.json
