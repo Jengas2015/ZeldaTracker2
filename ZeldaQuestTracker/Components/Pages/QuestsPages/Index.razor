@@ -11,21 +11,50 @@
     <a href="quests/create" class="btn btn-primary">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="DB.Quests">
-    <PropertyColumn Property="quests => quests.Name" />
 
-    <TemplateColumn Context="quests">
-        <a href="@(quests.Walkthrough.StartsWith("http://") || quests.Walkthrough.StartsWith("https://") ? quests.Walkthrough : "http://" + quests.Walkthrough)">@quests.Walkthrough</a>
-    </TemplateColumn>
+<MudTable Items="DB.Quests">
+    <HeaderContent>
+        <MudTh>Quest Name</MudTh>
+        <MudTh>Youtube Video</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate Context="quests">
+        <MudTd>
+            <MudLink Href="@EnsureHttpPrefix(quests.Walkthrough)">@quests.Name</MudLink>
+        </MudTd>
+        <MudTd>
+            <MudLink Href="@EnsureHttpPrefix(quests.Video)"><img src="@GetYoutubeThumbnailUrl(quests.Video)" /></MudLink>
+        </MudTd>
+        <MudTd>
+            <MudLink Href="@($"quests/edit?id={quests.Id}")">Edit</MudLink> |
+            <MudLink Href="@($"quests/details?id={quests.Id}")">Details</MudLink> |
+            <MudLink Href="@($"quests/delete?id={quests.Id}")">Delete</MudLink>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
 
-    <TemplateColumn Context="quests">
-        <a href="@(quests.Video.StartsWith("http://") || quests.Video.StartsWith("https://") ? quests.Video : "http://" + quests.Video)">@quests.Video</a>
-    </TemplateColumn>
+@code {
+    public static string EnsureHttpPrefix(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return url; // Return the original URL if it's null or empty
 
+        // Check if the URL starts with "http://" or "https://", if not, prepend "http://"
+        if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+            url = "http://" + url;
 
-    <TemplateColumn Context="quests">
-        <a href="@($"quests/edit?id={quests.Id}")">Edit</a> |
-        <a href="@($"quests/details?id={quests.Id}")">Details</a> |
-        <a href="@($"quests/delete?id={quests.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+        return url;
+    }
+
+    public static string GetYoutubeThumbnailUrl(string videoUrl)
+    {
+        if (string.IsNullOrEmpty(videoUrl) || !videoUrl.Contains("v="))
+        {
+            return "";
+        }
+        else
+        {
+            return $"https://img.youtube.com/vi/{videoUrl.Split("v=")[1]}/0.jpg";
+        }
+    }
+}

@@ -8,36 +8,54 @@
 <h1>Create a New Quest</h1>
 
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <EditForm method="post" Model="Quests" OnValidSubmit="AddQuests" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" />
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label> 
-                <InputText id="name" @bind-Value="Quests.Name" class="form-control" /> 
-                <ValidationMessage For="() => Quests.Name" class="text-danger" /> 
-            </div>        
+                <label for="name" class="form-label">Name:</label>
+                <InputText id="name" @bind-Value="Quests.Name" class="form-control" />
+                <ValidationMessage For="() => Quests.Name" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="walkthrough" class="form-label">Walkthrough (URL):</label> 
-                <InputText id="walkthrough" @bind-Value="Quests.Walkthrough" class="form-control" /> 
-                <ValidationMessage For="() => Quests.Walkthrough" class="text-danger" /> 
-            </div>        
+                <label for="walkthrough" class="form-label">Walkthrough (URL):</label>
+                <InputText id="walkthrough" @bind-Value="Quests.Walkthrough" class="form-control" />
+                <ValidationMessage For="() => Quests.Walkthrough" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="video" class="form-label">Video (URL):</label> 
-                <InputText id="video" @bind-Value="Quests.Video" class="form-control" /> 
-                <ValidationMessage For="() => Quests.Video" class="text-danger" /> 
-            </div>        
+                <label for="video" class="form-label">Video (URL):</label>
+                <InputText id="video" @bind-Value="Quests.Video" class="form-control" />
+                <ValidationMessage For="() => Quests.Video" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
 </div>
+
 
 <div class="mt-2">
     <a href="/quests">Back to List</a>
 </div>
 
 @code {
+    private MudForm form;
+
+    private string ValidateName(string name)
+    {
+        if(string.IsNullOrEmpty(name))
+        {
+            return "This field cannot be empty";
+        }
+
+        if (!name.Contains("youtube"))
+        {
+            return "Please enter a valid Youtube link";
+        }
+
+        return null;
+    }
 
     [SupplyParameterFromForm]
     public Quests Quests { get; set; } = new();
