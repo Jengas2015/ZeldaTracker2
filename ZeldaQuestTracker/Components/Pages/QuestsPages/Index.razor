@@ -40,17 +40,17 @@
             return url; // Return the original URL if it's null or empty
 
         // Check if the URL starts with "http://" or "https://", if not, prepend "http://"
-        if (!url.StartsWith("http://") && !url.StartsWith("https://"))
-            url = "http://" + url;
+        if (url.StartsWith("http://") || url.StartsWith("https://"))
+            return url;
 
-        return url;
+        return "http://"+url;
     }
 
     public static string GetYoutubeThumbnailUrl(string videoUrl)
     {
         if (string.IsNullOrEmpty(videoUrl) || !videoUrl.Contains("v="))
         {
-            return "";
+            return string.Empty;
         }
         else
         {
