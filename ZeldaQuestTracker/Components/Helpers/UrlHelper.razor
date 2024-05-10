@@ -1,0 +1,25 @@
+@code {
+    public static string EnsureHttpPrefix(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return url; // Return the original URL if it's null or empty
+
+        // Check if the URL starts with "http://" or "https://", if not, prepend "http://"
+        if (url.StartsWith("http://") || url.StartsWith("https://"))
+            return url;
+
+        return "http://" + url;
+    }
+
+    public static string GetYoutubeThumbnailUrl(string videoUrl)
+    {
+        if (string.IsNullOrEmpty(videoUrl) || !videoUrl.Contains("v="))
+        {
+            return string.Empty;
+        }
+        else
+        {
+            return $"https://img.youtube.com/vi/{videoUrl.Split("v=")[1]}/0.jpg";
+        }
+    }
+}

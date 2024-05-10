@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @inject ZeldaQuestTracker.Data.ZeldaQuestTrackerContext DB
 @using ZeldaQuestTracker.Components.Model
+@using ZeldaQuestTracker.Components.Helpers
 
 <PageTitle>Quest List</PageTitle>
 
@@ -20,10 +21,10 @@
     </HeaderContent>
     <RowTemplate Context="quests">
         <MudTd>
-            <MudLink Href="@EnsureHttpPrefix(quests.Walkthrough)">@quests.Name</MudLink>
+            <MudLink Href="@UrlHelper.EnsureHttpPrefix(quests.Walkthrough)">@quests.Name</MudLink>
         </MudTd>
         <MudTd>
-            <MudLink Href="@EnsureHttpPrefix(quests.Video)"><img src="@GetYoutubeThumbnailUrl(quests.Video)" /></MudLink>
+            <MudLink Href="@UrlHelper.EnsureHttpPrefix(quests.Video)"><img src="@UrlHelper.GetYoutubeThumbnailUrl(quests.Video)" /></MudLink>
         </MudTd>
         <MudTd>
             <MudLink Href="@($"quests/edit?id={quests.Id}")">Edit</MudLink> |
@@ -33,28 +34,3 @@
     </RowTemplate>
 </MudTable>
 
-@code {
-    public static string EnsureHttpPrefix(string url)
-    {
-        if (string.IsNullOrEmpty(url))
-            return url; // Return the original URL if it's null or empty
-
-        // Check if the URL starts with "http://" or "https://", if not, prepend "http://"
-        if (url.StartsWith("http://") || url.StartsWith("https://"))
-            return url;
-
-        return "http://"+url;
-    }
-
-    public static string GetYoutubeThumbnailUrl(string videoUrl)
-    {
-        if (string.IsNullOrEmpty(videoUrl) || !videoUrl.Contains("v="))
-        {
-            return string.Empty;
-        }
-        else
-        {
-            return $"https://img.youtube.com/vi/{videoUrl.Split("v=")[1]}/0.jpg";
-        }
-    }
-}
