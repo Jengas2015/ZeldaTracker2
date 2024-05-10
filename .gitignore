@@ -1,2 +1,11 @@
+bin/
+obj/
 .vs/
+*.user
+*.suo
+*.userprefs
+*.log
+packages/
+*.pidb
+*.sln.ide
 *.vsidx
