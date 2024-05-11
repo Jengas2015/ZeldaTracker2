@@ -2,11 +2,15 @@
     public static string EnsureHttpPrefix(string url)
     {
         if (string.IsNullOrEmpty(url))
+        {
             return url; // Return the original URL if it's null or empty
+        } 
 
         // Check if the URL starts with "http://" or "https://", if not, prepend "http://"
         if (url.StartsWith("http://") || url.StartsWith("https://"))
+        {
             return url;
+        }
 
         return "http://" + url;
     }
