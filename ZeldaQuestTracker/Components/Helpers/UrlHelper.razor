@@ -1,8 +1,8 @@
-@code {
+@code { //code was migrated to its own helper directory in order to allow for greater modularity as recommended during our interview
     public static string EnsureHttpPrefix(string url)
     {
         if (string.IsNullOrEmpty(url))
-        {
+        { //curly braces were added for structural consistency.
             return url; // Return the original URL if it's null or empty
         } 
 
@@ -12,7 +12,7 @@
             return url;
         }
 
-        return "http://" + url;
+        return $"http://{url}"; //I noticed I used string interpolation on ln 26 but not here. I've reformatted this line to mirror it in order to ensure formatting consistency.
     }
 
     public static string GetYoutubeThumbnailUrl(string videoUrl)
